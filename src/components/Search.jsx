@@ -1,11 +1,34 @@
 import React, { useState } from 'react';
 import LoupeIcon from '../assets/images/loupe-svgrepo-com.svg'; 
 import { carBrands, fuelTypes, drives, gearboxTypes, conditions, damages, bodyTypes } from './Announcments';
+// import Announcments from './Announcments'; 
+import Announcments, { advertisements } from './Announcments';
 
 
 const Search = () => {
-  const [selectedLocation, setSelectedLocation] = useState(""); // Stan do zarządzania wybraną lokalizacją
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [selectedFuelType, setSelectedFuelType] = useState('');
+  const [selectedBodyType, setSelectedBodyType] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('');
 
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'car-brands') setSelectedBrand(value);
+    if (name === 'fuel-type') setSelectedFuelType(value);
+    if (name === 'body-type') setSelectedBodyType(value);
+  };
+
+  console.log("Selected Brand:", selectedBrand);
+  console.log("Selected Fuel Type:", selectedFuelType);
+  console.log("Selected Body Type:", selectedBodyType);
+
+  const filteredCars = advertisements.filter((car) => {
+    return (
+      (selectedBrand === '' || car.brand === selectedBrand) &&
+      (selectedFuelType === '' || car.fuelType === selectedFuelType) &&
+      (selectedBodyType === '' || car.bodyType === selectedBodyType)
+    );
+  });
   return (
     <>
      <section className="search-section">
@@ -14,7 +37,7 @@ const Search = () => {
              <input placeholder="Wpisz markę, model" className="browser" type="text"/>
          </div>
          <form className="search" action="">
-             <select className="search__select" name="car-brands" id="searchBrand">
+             <select className="search__select" name="car-brands" id="searchBrand" onChange={handleFilterChange}>
                  <option value="">Marka</option>
                  {Object.keys(carBrands).map((key) => (
                    <option key={key} value={carBrands[key]}>
@@ -114,6 +137,7 @@ const Search = () => {
              <button name="filter" className="search__button">Szukaj</button>
          </form>
      </section>
+     <Announcments cars={filteredCars} />
     </>
   );
 }

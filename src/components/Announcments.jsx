@@ -119,32 +119,34 @@ export let bodyTypes = {
     minivan: "minivan"
 }
 
-let advertisements = [
+export let advertisements = [
     new CarAd(1, carBrands.Audi, "A4", 95000, 230000, 2017, "1999 cm3", 143, fuelTypes.diesel, gearboxTypes.manual, drives.fwd, bodyTypes.combi, conditions.used, damages.accidentFree, audi, "Warszawa" ),
     new CarAd(2, carBrands.BMW, "Seria 3", 150000, 120000, 2020, "1999 cm3", 180, fuelTypes.petrol, gearboxTypes.automatic, drives.rwd, bodyTypes.sedan, conditions.used, damages.accidentFree, bmw, "Wrocław"),
     new CarAd(3, carBrands.Ford, "Focus", 80000, 100000, 2018, "1596 cm3", 125, fuelTypes.petrol, gearboxTypes.manual, drives.fwd, bodyTypes.hatchback, conditions.used, damages.accidentFree, ford, "Kraków"),
     new CarAd(4, carBrands.Volvo, "S40", 15000, 250000, 2006, "1997 cm3", 136, fuelTypes.diesel, gearboxTypes.manual, drives.fwd, bodyTypes.sedan, conditions.used, damages.accidentFree, volvo, "Kraków")
 ];
 
-const Announcments = () => {
+
+
+const Announcments = ({ cars = [] }) => {  // Zdefiniowanie `cars` jako props z domyślną wartością []
   return (
     <>
-     <section className="announcements-section">
-      {advertisements.map(ad => (
-        <a className="announcement__link" href="#" key={ad.id}>
-          <div className="announcement">
-            <img className="announcement__img" src={ad.image} alt={ad.model} />
-            <h2 className="announcement__description">{ad.brand} {ad.model}</h2>
-            <p className="announcement__specifics">{ad.engineCapacity} {ad.power}KM {ad.year}</p>
-            <span className="announcement__price">{ad.price.toLocaleString()} PLN</span>
-            <p className="announcement__specifics">{ad.mileage.toLocaleString()}km {ad.bodyType} {ad.gearbox} {ad.fuelType}</p>
-            <span className="announcement__location">{ad.location}</span>
-          </div>
-        </a>
-      ))}
-    </section>
+      <section className="announcements-section">
+          {cars.map(ad => (
+            <a className="announcement__link" href="#" key={ad.id}>
+              <div className="announcement">
+                <img className="announcement__img" src={ad.image} alt={ad.model} />
+                <h2 className="announcement__description">{ad.brand} {ad.model}</h2>
+                <p className="announcement__specifics">{ad.engineCapacity} {ad.power}KM {ad.year}</p>
+                <span className="announcement__price">{ad.price.toLocaleString()} PLN</span>
+                <p className="announcement__specifics">{ad.mileage.toLocaleString()}km {ad.bodyType} {ad.gearbox} {ad.fuelType}</p>
+                <span className="announcement__location">{ad.location}</span>
+              </div>
+            </a>
+          ))}
+      </section>
     </>
-  )
-}
+  );
+};
 
 export default Announcments
