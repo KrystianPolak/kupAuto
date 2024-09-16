@@ -9,6 +9,7 @@ import './Reset.css'
 import HomePage from './pages/HomePage'
 import MainLayout from './Layouts/MainLayout'
 import CorePage from './pages/CorePage'
+import Login from './components/Login'
 
 
 const router = createBrowserRouter(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
    <Route path='/' element={<MainLayout/>}>
       <Route index element={<HomePage/>} />
       <Route path='/core' element={<CorePage/>} />
+      <Route path='/login' element={<Login/>} />
    </Route>
    )
 );

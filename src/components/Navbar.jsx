@@ -14,7 +14,7 @@ const Navbar = () => {
          <FontAwesomeIcon icon={faPlus} className='fa-plus' /> 
              Dodaj ogłoszenie
          </Link>
-         <Link className="login" to="">Zaloguj się/Zarejestruj się</Link>
+         <Link className="login" to="/login">Zaloguj się/Zarejestruj się</Link>
      </div>
      </header>
      </>
