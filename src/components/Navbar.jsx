@@ -10,7 +10,7 @@ const Navbar = () => {
     <header className="first-page__header">
       <Link to="/"> <img className="logo" src={logo} alt=""></img></Link>
        <div className='flex-links'>
-         <Link to="" className="add-announcement">
+         <Link to="/add-announcment" className="add-announcement">
          <FontAwesomeIcon icon={faPlus} className='fa-plus' /> 
              Dodaj ogłoszenie
          </Link>

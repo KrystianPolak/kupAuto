@@ -132,7 +132,6 @@ const Search = () => {
                  onChange={(e) => setSelectedLocation(e.target.value)}
              >
                  <option value="" disabled>Lokalizacja</option>
-                 {/* Tutaj można dodać więcej opcji */}
              </select>
              <button name="filter" className="search__button">Szukaj</button>
          </form>
