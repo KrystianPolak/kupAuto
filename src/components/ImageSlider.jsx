@@ -18,7 +18,14 @@ const ImageSlider = ({ imageUrls }) => {
 
     return (
         <div className='image-slider'>
-            <img className='image-slider__img' src={imageUrls[imageIndex]} alt="slider" />
+            <div style={{width: '100%', height: '100%', overflow: 'hidden', display: 'flex'}}>
+                {imageUrls.map(url => (
+                    <img key={url} className='image-slider__img' src={url} alt="slider" style ={{
+                        translate: `${-100 *imageIndex}%`
+                    }} />
+                ))}
+            </div>
+            
             <button className='image-slider__btn' style={{left: 0}} onClick={handlePrevImage}>
                 <ArrowBackIosIcon style={{fontSize: '3rem'}} />
             </button>
