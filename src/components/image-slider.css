@@ -37,3 +37,21 @@
     stroke: white;
     fill: black;
 }
+
+.image-slider__dot-btn {
+    all: unset;
+    /* background-color: aqua; */
+    display: block;
+    cursor: pointer;
+    
+}
+
+.image-slider__dot-btn:focus {
+    outline: none;
+}
+   
+
+.image-slider__dot-btn > * {
+    stroke: white;
+    fill: black;
+}

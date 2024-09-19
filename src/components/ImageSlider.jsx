@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import './image-slider.css';
+import AdjustIcon from '@mui/icons-material/Adjust';
+import CircleIcon from '@mui/icons-material/Circle';import './image-slider.css';
+import CircleTwoToneIcon from '@mui/icons-material/CircleTwoTone';
 
 const ImageSlider = ({ imageUrls }) => {
     const [imageIndex, setImageIndex] = useState(0); // Ustawienie domyślnego indeksu na 0
@@ -32,7 +34,22 @@ const ImageSlider = ({ imageUrls }) => {
             <button className='image-slider__btn' style={{right: 0}} onClick={handleNextImage}>
                 <ArrowForwardIosIcon style={{fontSize: '3rem'}} />
             </button>
+            <div style ={{
+                position: 'absolute',
+                bottom: '.5rem',
+                left: "50%",
+                translate: "-50%",
+                display: "flex",
+                gap: ".25rem"
+            }}>
+                {imageUrls.map((_, index) => (
+                    <button key={index} className='image-slider__dot-btn' onClick={() => setImageIndex(index)}>
+                        {index === imageIndex ? <CircleTwoToneIcon></CircleTwoToneIcon> : <CircleIcon></CircleIcon> }
+                    </button>
+                ))}
+            </div>
         </div>
+
     );
 };
 
