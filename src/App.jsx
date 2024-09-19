@@ -12,6 +12,7 @@ import CorePage from './pages/CorePage'
 import Login from './pages/LoginPage'
 import Signup from './pages/SignupPage'
 import AddAnnouncment from './pages/AddAnnouncmentPage'
+import Announcment from './pages/AnnouncmentPage'
 
 
 const router = createBrowserRouter(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login/>} />
       <Route path='/sign-up' element={<Signup/>} />
       <Route path='/add-announcment' element={<AddAnnouncment/>} />
+      <Route path='/announcment' element={<Announcment/>} />
    </Route>
    )
 );

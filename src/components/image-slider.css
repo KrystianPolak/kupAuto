@@ -1,0 +1,36 @@
+.image-slider {
+    width: 60%;
+    aspect-ratio: 4/2;
+    position: relative;
+}
+
+.image-slider__img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.image-slider__btn{
+    all: unset;
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    padding: 16px;
+    cursor: pointer;
+    transition: 100ms ease-in-out;
+}
+
+.image-slider__btn:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+
+}
+.image-slider__btn:focus {
+    outline: none;
+}
+
+.image-slider__btn > * {
+    stroke: white;
+    fill: black;
+}
