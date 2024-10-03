@@ -457,6 +457,12 @@
 
 /* Single announcement */
 
+.announcment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .announcment__top-information {
   display: flex;
