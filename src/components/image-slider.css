@@ -1,7 +1,9 @@
 .image-slider {
-    width: 50%;
-    aspect-ratio: 4/2;
+    width: 40%;
+    aspect-ratio: 5/4;
     position: relative;
+    /* margin: 2rem 0; */
+    /* box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3); */
 }
 
 .image-slider__img {
@@ -43,7 +45,11 @@
     /* background-color: aqua; */
     display: block;
     cursor: pointer;
-    
+    transition: scale 100ms ease-in-out;
+}
+
+.image-slider__dot-btn:hover {
+    scale: 1.2;
 }
 
 .image-slider__dot-btn:focus {

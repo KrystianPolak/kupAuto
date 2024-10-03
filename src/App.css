@@ -455,3 +455,10 @@
   margin-left: 10px;
 }
 
+/* Single announcement */
+
+
+.announcment__top-information {
+  display: flex;
+  justify-content: center;
+}

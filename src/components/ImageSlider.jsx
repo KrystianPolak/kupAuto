@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AdjustIcon from '@mui/icons-material/Adjust';
-import CircleIcon from '@mui/icons-material/Circle';import './image-slider.css';
+import CircleIcon from '@mui/icons-material/Circle';
+import './image-slider.css';
 import CircleTwoToneIcon from '@mui/icons-material/CircleTwoTone';
 
 const ImageSlider = ({ imageUrls }) => {
