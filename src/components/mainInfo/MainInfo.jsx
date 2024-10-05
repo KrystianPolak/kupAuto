@@ -1,8 +1,8 @@
 import React from 'react'
 import './main-info.css';
 import './top-info.css'
-import UserInfo from './userInfo';
-import { advertisements } from './Announcments';
+import UserInfo from '../userInfo/UserInfo';
+import { advertisements } from '../Announcments';
 
 const MainInfo = () => {
 
