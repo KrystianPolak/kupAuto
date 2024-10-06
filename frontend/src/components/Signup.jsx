@@ -9,29 +9,31 @@ import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 
 const Signup = () => {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
 
   const validate = () => {
     const newErrors = {};
 
-    // Walidacja e-maila
+    if (!username) {
+      newErrors.username = 'Imię jest wymagane';
+    } else if (!/^[a-zA-Z]+$/.test(username)) {
+      newErrors.username = 'Imię może zawierać tylko litery (bez cyfr i znaków specjalnych)';
+    }
     if (!email) {
       newErrors.email = 'Email jest wymagany';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Podaj poprawny adres email';
     }
-
-    // Walidacja hasła
     if (!password) {
       newErrors.password = 'Hasło jest wymagane';
     } else if (password.length < 6) {
       newErrors.password = 'Hasło musi mieć co najmniej 6 znaków';
     }
-
-    // Walidacja powtórzonego hasła
     if (!confirmPassword) {
       newErrors.confirmPassword = 'Musisz powtórzyć hasło';
     } else if (confirmPassword !== password) {
@@ -41,14 +43,39 @@ const Signup = () => {
     return newErrors;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();  
+  
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
       setErrors({});
-      // Tutaj możesz obsłużyć logikę po poprawnej rejestracji
-      console.log('Formularz wysłany!', { email, password, confirmPassword });
+      try {
+        const response = await fetch('http://localhost:5000/api/users/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username,  
+            email,
+            password,
+          }),
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          setSuccessMessage('Rejestracja się powiodła!');
+        } else {
+          setErrors({ form: data.message });
+          setSuccessMessage('');
+        }
+      } catch (error) {
+        setErrors({ form: 'Błąd połączenia z serwerem' });
+        setSuccessMessage(''); 
+      }
     }
   };
 
@@ -74,6 +101,27 @@ const Signup = () => {
               Zarejestruj się
             </Typography>
           </div>
+          {errors.form && (
+            <Typography color="danger" fontSize="md">
+              {errors.form}
+            </Typography>
+          )}
+          <FormControl>
+            <FormLabel>Imie</FormLabel>
+            <Input
+              name="username"
+              type="username"
+              placeholder="Imie"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              error={!!errors.username}
+            />
+            {errors.username && (
+              <Typography color="danger" fontSize="sm">
+                {errors.username}
+              </Typography>
+            )}
+          </FormControl>
           <FormControl>
             <FormLabel>Email</FormLabel>
             <Input
@@ -127,10 +175,15 @@ const Signup = () => {
               mt: 1,
               backgroundColor: '#007BFF',
             }}
-            onClick={handleSubmit} // Obsługa kliknięcia zamiast przesłania formularza
+            onClick={handleSubmit} 
           >
             Zarejestruj się
           </Button>
+          {successMessage && (
+            <Typography color="success" fontSize="lg" textAlign="center" fontWeight="bold">
+              {successMessage}
+            </Typography>
+          )}
           <Typography
             endDecorator={<Link href="/login">Zaloguj się</Link>}
             fontSize="sm"

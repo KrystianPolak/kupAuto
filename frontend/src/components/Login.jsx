@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { CssVarsProvider } from '@mui/joy/styles';
 import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
@@ -10,6 +10,38 @@ import Link from '@mui/joy/Link';
 
 
 const Login = () => {
+  const [email, setEmail] = useState('');  
+  const [password, setPassword] = useState('');  
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();  
+  
+      try {
+        const response = await fetch('http://localhost:5000/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({  
+            email,
+            password,
+          }),
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setSuccessMessage('Zalogowano sie!');
+        } else {
+          setErrors({ form: data.message });
+          setSuccessMessage('');
+        }
+      } catch (error) {
+        setErrors({ form: 'Błąd połączenia z serwerem' });
+        setSuccessMessage(''); 
+      }
+    }
+  
   return (
     <>
      <CssVarsProvider>
@@ -31,6 +63,11 @@ const Login = () => {
       </Typography>
       <Typography level="body-lg" >Zaloguj się</Typography>
     </div>
+    {errors.form && (
+            <Typography color="danger" fontSize="md">
+              {errors.form}
+            </Typography>
+          )}
     <FormControl>
     <FormLabel>Email</FormLabel>
     <Input
@@ -38,6 +75,8 @@ const Login = () => {
         name="email"
         type="email"
         placeholder="email"
+        value={email}  
+        onChange={(e) => setEmail(e.target.value)}  
     />
     </FormControl>
     <FormControl>
@@ -46,13 +85,22 @@ const Login = () => {
         name="password"
         type="password"
         placeholder="hasło"
+        value={password}  
+        onChange={(e) => setPassword(e.target.value)}
     />
     </FormControl>
     <Button sx={{ mt: 1,
         backgroundColor: '#007BFF',
-    }}>
+    }}
+    onClick={handleSubmit}
+    >
     Zaloguj się
     </Button>
+    {successMessage && (
+            <Typography color="success" fontSize="lg" textAlign="center" fontWeight="bold">
+              {successMessage}
+            </Typography>
+          )}
     <Typography
     endDecorator={<Link href="/sign-up">Zarejestruj się</Link>}
     fontSize="sm"
