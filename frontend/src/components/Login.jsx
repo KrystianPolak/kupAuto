@@ -8,6 +8,7 @@ import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { login } = useAuth();
@@ -15,6 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState('');  
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();  
@@ -32,8 +34,10 @@ const Login = () => {
         });
         const data = await response.json();
         if (response.ok) {
-          login();
+          login(data.accessToken); 
           setSuccessMessage('Zalogowano sie!');
+          console.log('zalogowano');
+          navigate('/');
         } else {
           setErrors({ form: data.message });
           setSuccessMessage('');

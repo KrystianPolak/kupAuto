@@ -4,11 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
-import "./logged-in-navbar.css"
-
+import "./logged-in-navbar.css";
+import { useAuth } from '../../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoggedInNavbar = () => {
     const[isMenuOpen, setIsMenuOpen] = useState(false);
+    const {logout} = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = (e) => {
+        e.preventDefault(); 
+        logout();
+        navigate('/'); 
+    };
 
   return (
     <>
@@ -26,7 +35,9 @@ const LoggedInNavbar = () => {
             <div className="dropdown-menu">
               <Link to="/profile">Mój Profil</Link>
               <Link to="/settings">Ustawienia</Link>
-              <Link to="/logout">Wyloguj się</Link>
+              <Link to="/" onClick={handleLogout} className="logout-link">
+                Wyloguj się
+              </Link>
             </div>
           )}
         </div>
