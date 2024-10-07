@@ -1,0 +1,70 @@
+.first-page__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 32px 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Dodanie efektu cienia */
+  }
+  
+.first-page__header__heading {
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+.add-announcement {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 15px;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+  }
+  
+.add-announcement:hover {
+    background-color: #0056b3;
+}
+
+.MuiSvgIcon-root.user-icon {
+    width: 3em;
+    height: auto;
+    margin: 0 2rem;
+    color: rgb(82, 80, 80);
+    align-self: center;
+  }
+
+  .user-icon-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; 
+    margin: 0,2rem;
+    text-align: center;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    border-radius: 4px;
+  }
+  
+  .user-icon-container:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-menu a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #f1f1f1;
+  }

@@ -7,9 +7,10 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
-
+import { useAuth } from '../AuthContext';
 
 const Login = () => {
+  const { login } = useAuth();
   const [email, setEmail] = useState('');  
   const [password, setPassword] = useState('');  
   const [errors, setErrors] = useState({});
@@ -31,6 +32,7 @@ const Login = () => {
         });
         const data = await response.json();
         if (response.ok) {
+          login();
           setSuccessMessage('Zalogowano sie!');
         } else {
           setErrors({ form: data.message });

@@ -13,6 +13,7 @@ import Login from './pages/LoginPage'
 import Signup from './pages/SignupPage'
 import AddAnnouncment from './pages/AddAnnouncmentPage'
 import Announcment from './pages/AnnouncmentPage'
+import { AuthProvider } from './AuthContext'
 
 
 const router = createBrowserRouter(
@@ -30,8 +31,11 @@ const router = createBrowserRouter(
 
 function App() {
   
-
-  return <RouterProvider router={router}/>;
+   return (
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    );
 }
 
 export default App
