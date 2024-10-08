@@ -13,9 +13,13 @@ const AnnouncmentPage = () => {
     <div className="announcment">
     <section className='announcment__top-information'>
     <ImageSlider imageUrls={images}></ImageSlider>
+    <Details></Details>
+    <hr className='divider' />
+    <h1>Opis</h1>
+    </section>
+    <section className="announcment__main-info">
     <MainInfo></MainInfo>
     </section>
-    <Details></Details>
     </div>
   )
 }

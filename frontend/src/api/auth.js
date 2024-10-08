@@ -38,20 +38,35 @@ export  const logout = async () => {
   };
 
   export const fetchUserData = async () => {
-    const accessToken = localStorage.getItem('accessToken');
+    let accessToken = localStorage.getItem('accessToken');
   
-    const response = await fetch('http://localhost:5000/api/users/getLoggedUserData', {
+    let response = await fetch('http://localhost:5000/api/users/getLoggedUserData', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
       },
+      credentials: 'include'
     });
   
+    if (response.status === 403 || response.status === 401) {
+      await refreshAccessToken();
+      accessToken = localStorage.getItem('accessToken'); 
+  
+      response = await fetch('http://localhost:5000/api/users/getLoggedUserData', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include'
+      });
+    }
     const data = await response.json();
     if (response.ok) {
       return data; 
     } else {
-      throw new Error(data.message);
+      throw new Error(data.message || 'Błąd w trakcie pobierania danych');
     }
   };
+  

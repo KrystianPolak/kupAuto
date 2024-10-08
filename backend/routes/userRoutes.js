@@ -156,7 +156,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 
-router.get('/getLoggedUSerData', authenticateToken, async (req, res) => {
+router.get('/getLoggedUserData', authenticateToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select('-password');
     if (!user) return res.status(404).json({ message: 'Użytkownik nie znaleziony' });
