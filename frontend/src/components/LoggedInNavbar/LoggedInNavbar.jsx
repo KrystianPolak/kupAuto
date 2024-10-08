@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../../assets/images/logo_przyciete.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -7,11 +7,28 @@ import PersonIcon from '@mui/icons-material/Person';
 import "./logged-in-navbar.css";
 import { useAuth } from '../../AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { fetchUserData } from '../../api/auth';
 
 const LoggedInNavbar = () => {
     const[isMenuOpen, setIsMenuOpen] = useState(false);
     const {logout} = useAuth();
     const navigate = useNavigate();
+    const[loggedUserData, setLoggedUserData] = useState({username: ""});
+
+    useEffect(() => {
+      const loadLoggedUserData = async () => {
+        try {
+          const data = await fetchUserData();
+          setLoggedUserData(data);
+        } catch (error) {
+          console.log('blad ladowania danych: ', error);
+        }
+      };
+
+      loadLoggedUserData();
+    }, []);
+
+    console.log(fetchUserData());
 
     const handleLogout = (e) => {
         e.preventDefault(); 
@@ -30,7 +47,16 @@ const LoggedInNavbar = () => {
           onMouseEnter={() => setIsMenuOpen(true)}
           onMouseLeave={() => setIsMenuOpen(false)}
         >
+          <div style = {{
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "center", 
+            fontSize: "1.2em", 
+            textTransform: "uppercase"
+          }}>
           <PersonIcon className="user-icon" />
+          <span style={{}}>{loggedUserData.username}</span>
+          </div>
           {isMenuOpen && (
             <div className="dropdown-menu">
               <Link to="/profile">Mój Profil</Link>

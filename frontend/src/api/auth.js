@@ -36,3 +36,22 @@ export  const logout = async () => {
       console.error('Błąd wylogowania', error);
     }
   };
+
+  export const fetchUserData = async () => {
+    const accessToken = localStorage.getItem('accessToken');
+  
+    const response = await fetch('http://localhost:5000/api/users/getLoggedUserData', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    const data = await response.json();
+    if (response.ok) {
+      return data; 
+    } else {
+      throw new Error(data.message);
+    }
+  };

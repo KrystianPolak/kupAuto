@@ -143,4 +143,29 @@ router.post('/logout', async (req, res) => {
   }
 });
 
+
+const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization']?.split(' ')[1];
+  if (!token) return res.status(401).json({ message: 'Brak tokena' });
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ message: 'Token jest nieprawidłowy' });
+    req.user = user; 
+    next();
+  });
+};
+
+
+router.get('/getLoggedUSerData', authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId).select('-password');
+    if (!user) return res.status(404).json({ message: 'Użytkownik nie znaleziony' });
+    
+    res.status(200).json(user); 
+  } catch (error) {
+    res.status(500).json({ message: 'Błąd serwera' });
+  }
+});
+
+
 module.exports = router;
