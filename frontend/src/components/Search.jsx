@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import LoupeIcon from '../assets/images/loupe-svgrepo-com.svg'; 
-import { carBrands, fuelTypes, drives, gearboxTypes, conditions, damages, bodyTypes } from './Announcments';
+import { fuelTypes, drives, gearboxTypes, conditions, damages, bodyTypes } from './Announcments';
 // import Announcments from './Announcments'; 
 import Announcments, { advertisements } from './Announcments';
+import carBrandsAndModels from '../data/carBrandsAndModels.json'
 
 
 const Search = () => {
@@ -11,16 +12,22 @@ const Search = () => {
   const [selectedBodyType, setSelectedBodyType] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'car-brands') setSelectedBrand(value);
-    if (name === 'fuel-type') setSelectedFuelType(value);
-    if (name === 'body-type') setSelectedBodyType(value);
+  const carBrands = carBrandsAndModels.map((car) => car.brand).sort();
+
+  const handleBrandChange = (e) => {
+    setSelectedBrand(e.target.value);
   };
 
-  console.log("Selected Brand:", selectedBrand);
-  console.log("Selected Fuel Type:", selectedFuelType);
-  console.log("Selected Body Type:", selectedBodyType);
+  const selectedBrandData = carBrandsAndModels.find((car) => car.brand === selectedBrand);
+  const getCarModels = () => {
+    if (selectedBrandData) {
+      return selectedBrandData.models;
+    }
+    return [];
+  };
+  const carModels = getCarModels();
+
+
 
   const filteredCars = advertisements.filter((car) => {
     return (
@@ -37,18 +44,18 @@ const Search = () => {
              <input placeholder="Wpisz markę, model" className="browser" type="text"/>
          </div>
          <form className="search" action="">
-             <select className="search__select" name="car-brands" id="searchBrand" onChange={handleFilterChange}>
+             <select className="search__select" name="car-brands" id="searchBrand" onChange={handleBrandChange}>
                  <option value="">Marka</option>
-                 {Object.keys(carBrands).map((key) => (
-                   <option key={key} value={carBrands[key]}>
-                     {carBrands[key]}
-                   </option>
-                 ))}
+                 {carBrands.map((brand, index) => (
+                    <option key={index} value={brand}>{brand}</option>
+                  ))}
              </select> 
                   
              <select className="search__select" name="car-models" id="">
                  <option value="">Model</option>
-
+                 {carModels.map((models, index) => (
+                    <option key={index} value={models}>{models}</option>
+                  ))}
              </select>
      
              <input type="text" className="search__select" placeholder="Cena od" name="price-from"/>

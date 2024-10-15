@@ -1,0 +1,40 @@
+{
+    "fuelTypes": {
+        "petrol": "Benzyna",
+        "diesel": "Diesel",
+        "hybrid": "Hybryda",
+        "electric": "Elektryczny",
+        "lpg": "benzyna + lpg",
+        "hydrogen": "Wodór"
+    },
+
+    "gearboxTypes":  {
+        "manual": "manual",
+        "automatic": "automatyczna"
+    },
+
+    "drives": {
+    "fwd": "na przednie koła",
+    "rwd": "na tylne koła",
+    "awd": "4x4"
+    },
+
+    "conditions": {
+        "new": "nowy",
+        "used": "używany"
+    },
+
+    "damages": {
+        "accidentFree": "bezwypadkowy",
+        "damaged": "uszkodzony"
+    },
+    
+    "bodyTypes": {
+        "sedan": "sedan",
+        "hatchback": "hatchback",
+        "combi": "kombi",
+        "coupe": "coupe",
+        "suv": "SUV",
+        "minivan": "minivan"
+    }
+}

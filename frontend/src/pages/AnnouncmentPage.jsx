@@ -5,6 +5,7 @@ import ford from "../assets/images/focus_rs.jpg"
 import ImageSlider from '../components/imageSlider/ImageSlider';
 import MainInfo from '../components/mainInfo/MainInfo';
 import Details from '../components/Details/Details';
+import Description from '../components/Description/Description';
 
 const images = [audi,bmw,ford];
 
@@ -15,7 +16,7 @@ const AnnouncmentPage = () => {
     <ImageSlider imageUrls={images}></ImageSlider>
     <Details></Details>
     <hr className='divider' />
-    <h1>Opis</h1>
+    <Description></Description>
     </section>
     <section className="announcment__main-info">
     <MainInfo></MainInfo>

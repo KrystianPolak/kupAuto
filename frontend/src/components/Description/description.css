@@ -1,0 +1,15 @@
+.description__heading {
+    all: unset;
+    display: block;
+    font-weight: bold;
+    font-size: 2em;
+    /* padding: 4px; */
+    padding: 16px 0;
+}
+
+.description {
+    padding: 16px;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    color: rgb(85, 81, 81);    
+}

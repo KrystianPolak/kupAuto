@@ -1,0 +1,163 @@
+[
+    {
+      "brand": "Mercedes-Benz",
+      "models": ["Klasa A", "Klasa B", "Klasa C", "Klasa E", "Klasa S", "GLA", "GLC", "GLE", "GLS"]
+    },
+    {
+      "brand": "BMW",
+      "models": ["1 Series", "2 Series", "3 Series", "4 Series", "5 Series", "6 Series", "7 Series", "X1", "X3", "X5"]
+    },
+    {
+      "brand": "Audi",
+      "models": ["A1", "A3", "A4", "A5", "A6", "A7", "A8", "Q3", "Q5", "Q7", "Q8"]
+    },
+    {
+      "brand": "Volkswagen",
+      "models": ["Golf", "Passat", "Tiguan", "Polo", "Touareg", "T-Roc", "Arteon", "Caddy"]
+    },
+    {
+      "brand": "Toyota",
+      "models": ["Corolla", "Camry", "RAV4", "Yaris", "Highlander", "Land Cruiser", "Hilux", "Prius", "Avalon"]
+    },
+    {
+      "brand": "Honda",
+      "models": ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "Fit", "HR-V", "Passport"]
+    },
+    {
+      "brand": "Ford",
+      "models": ["Fiesta", "Focus", "Mondeo", "Mustang", "Escape", "Explorer", "F-150", "Ranger"]
+    },
+    {
+      "brand": "Nissan",
+      "models": ["Micra", "Almera", "Qashqai", "Juke", "X-Trail", "Navara", "370Z", "GT-R"]
+    },
+    {
+      "brand": "Hyundai",
+      "models": ["i10", "i20", "i30", "Elantra", "Sonata", "Tucson", "Santa Fe", "Kona"]
+    },
+    {
+      "brand": "Kia",
+      "models": ["Picanto", "Rio", "Ceed", "Sportage", "Sorento", "Optima", "Stinger", "Soul"]
+    },
+    {
+      "brand": "Mazda",
+      "models": ["2", "3", "6", "CX-3", "CX-5", "CX-9", "MX-5"]
+    },
+    {
+      "brand": "Subaru",
+      "models": ["Impreza", "Legacy", "Outback", "Forester", "Crosstrek", "Ascent"]
+    },
+    {
+      "brand": "Chevrolet",
+      "models": ["Spark", "Malibu", "Impala", "Camaro", "Equinox", "Traverse", "Tahoe", "Silverado"]
+    },
+    {
+      "brand": "Jeep",
+      "models": ["Renegade", "Compass", "Cherokee", "Grand Cherokee", "Wrangler", "Gladiator"]
+    },
+    {
+      "brand": "Dodge",
+      "models": ["Charger", "Challenger", "Durango", "Journey", "Ram"]
+    },
+    {
+      "brand": "Chrysler",
+      "models": ["300", "Pacifica", "Voyager"]
+    },
+    {
+      "brand": "Tesla",
+      "models": ["Model S", "Model 3", "Model X", "Model Y", "Roadster"]
+    },
+    {
+      "brand": "Volvo",
+      "models": ["S60", "S90", "V60", "V90", "XC40", "XC60", "XC90"]
+    },
+    {
+      "brand": "Jaguar",
+      "models": ["XE", "XF", "XJ", "E-PACE", "F-PACE", "I-PACE", "F-TYPE"]
+    },
+    {
+      "brand": "Land Rover",
+      "models": ["Range Rover", "Range Rover Sport", "Range Rover Evoque", "Discovery", "Defender"]
+    },
+    {
+      "brand": "Lexus",
+      "models": ["IS", "ES", "GS", "LS", "UX", "NX", "RX", "GX", "LX"]
+    },
+    {
+      "brand": "Porsche",
+      "models": ["Cayenne", "Macan", "Panamera", "911", "Taycan", "718 Cayman", "718 Boxster"]
+    },
+    {
+      "brand": "Ferrari",
+      "models": ["488 GTB", "Portofino", "F8 Tributo", "812 Superfast", "SF90 Stradale"]
+    },
+    {
+      "brand": "Lamborghini",
+      "models": ["Huracan", "Aventador", "Urus", "Gallardo"]
+    },
+    {
+      "brand": "Maserati",
+      "models": ["Ghibli", "Quattroporte", "Levante", "GranTurismo"]
+    },
+    {
+      "brand": "Rolls-Royce",
+      "models": ["Phantom", "Ghost", "Wraith", "Dawn", "Cullinan"]
+    },
+    {
+      "brand": "Bentley",
+      "models": ["Continental GT", "Flying Spur", "Bentayga", "Mulsanne"]
+    },
+    {
+      "brand": "Alfa Romeo",
+      "models": ["Giulia", "Stelvio", "4C", "Giulietta"]
+    },
+    {
+      "brand": "Peugeot",
+      "models": ["208", "308", "508", "2008", "3008", "5008"]
+    },
+    {
+      "brand": "Renault",
+      "models": ["Clio", "Megane", "Captur", "Kadjar", "Scenic", "Talisman"]
+    },
+    {
+      "brand": "Citroen",
+      "models": ["C1", "C3", "C4", "C5 Aircross", "Berlingo", "C3 Aircross"]
+    },
+    {
+      "brand": "Fiat",
+      "models": ["500", "Panda", "Tipo", "500X", "500L", "Ducato"]
+    },
+    {
+      "brand": "Mitsubishi",
+      "models": ["Mirage", "Lancer", "Outlander", "Eclipse Cross", "ASX", "Pajero"]
+    },
+    {
+      "brand": "Suzuki",
+      "models": ["Swift", "Vitara", "Jimny", "S-Cross", "Ignis", "Baleno"]
+    },
+    {
+      "brand": "Acura",
+      "models": ["ILX", "TLX", "RLX", "RDX", "MDX", "NSX"]
+    },
+    {
+      "brand": "Infiniti",
+      "models": ["Q50", "Q60", "Q70", "QX30", "QX50", "QX60", "QX80"]
+    },
+    {
+      "brand": "Genesis",
+      "models": ["G70", "G80", "G90", "GV80"]
+    },
+    {
+      "brand": "Buick",
+      "models": ["Encore", "Enclave", "Envision", "Regal", "Lacrosse"]
+    },
+    {
+      "brand": "Lincoln",
+      "models": ["MKZ", "Continental", "Corsair", "Nautilus", "Aviator", "Navigator"]
+    },
+    {
+      "brand": "Cadillac",
+      "models": ["ATS", "CT4", "CT5", "CT6", "XT4", "XT5", "Escalade"]
+    }
+  ]
+  
