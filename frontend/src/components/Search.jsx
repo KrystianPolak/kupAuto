@@ -1,41 +1,48 @@
 import React, { useState } from 'react';
 import LoupeIcon from '../assets/images/loupe-svgrepo-com.svg'; 
-import { fuelTypes, drives, gearboxTypes, conditions, damages, bodyTypes } from './Announcments';
+// import { fuelTypes, drives, gearboxTypes, conditions, damages, bodyTypes } from './Announcments';
 // import Announcments from './Announcments'; 
 import Announcments, { advertisements } from './Announcments';
-import carBrandsAndModels from '../data/carBrandsAndModels.json'
+// import carBrandsAndModels from '../data/carBrandsAndModels.json'
+import useCarBrandsAndModels from '../hooks/useCarBrandsAndModels';
+import useCarData from '../hooks/useCarData';
+import MultiSelectCheckbox from './MultiSelectCheckbox/MultiSelectCheckbox';
+
+
 
 
 const Search = () => {
-  const [selectedBrand, setSelectedBrand] = useState('');
-  const [selectedFuelType, setSelectedFuelType] = useState('');
-  const [selectedBodyType, setSelectedBodyType] = useState('');
+  // const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
 
-  const carBrands = carBrandsAndModels.map((car) => car.brand).sort();
+  const { carBrands, selectedBrand, handleBrandChange, carModels } = useCarBrandsAndModels();
+  const {selectedFuelTypes,
+    selectedGearBoxes,
+    selectedDrives,
+    selectedCondition,
+    selectedDamages,
+    selectedBodyTypes,
+    fuelTypes,
+    gearBoxes,
+    drives,
+    condition,
+    damages,
+    bodyTypes,
+    setSelectedValue} = useCarData();
 
-  const handleBrandChange = (e) => {
-    setSelectedBrand(e.target.value);
-  };
-
-  const selectedBrandData = carBrandsAndModels.find((car) => car.brand === selectedBrand);
-  const getCarModels = () => {
-    if (selectedBrandData) {
-      return selectedBrandData.models;
-    }
-    return [];
-  };
-  const carModels = getCarModels();
-
+  const getSelect = (handle) => (e) => handle(e.target.value);
 
 
   const filteredCars = advertisements.filter((car) => {
     return (
       (selectedBrand === '' || car.brand === selectedBrand) &&
-      (selectedFuelType === '' || car.fuelType === selectedFuelType) &&
-      (selectedBodyType === '' || car.bodyType === selectedBodyType)
+      (selectedFuelTypes.length === 0 || selectedFuelTypes.includes(car.fuelType.toLowerCase())) &&
+      (selectedBodyTypes === '' || car.bodyType === selectedBodyTypes)
     );
   });
+
+  console.log(selectedFuelTypes);
+  
   return (
     <>
      <section className="search-section">
@@ -44,7 +51,12 @@ const Search = () => {
              <input placeholder="Wpisz markę, model" className="browser" type="text"/>
          </div>
          <form className="search" action="">
-             <select className="search__select" name="car-brands" id="searchBrand" onChange={handleBrandChange}>
+            <MultiSelectCheckbox 
+        options={fuelTypes} 
+        placeholder={'rodzaj paliwa'}
+        onChange={(selectedFuelTypes) => setSelectedValue('fuelTypes', selectedFuelTypes)}
+        />
+             <select className="search__select" name="car-brands" id="searchBrand" onChange={getSelect(handleBrandChange)}>
                  <option value="">Marka</option>
                  {carBrands.map((brand, index) => (
                     <option key={index} value={brand}>{brand}</option>
@@ -78,31 +90,25 @@ const Search = () => {
      
              <input type="text" className="search__select" placeholder="Moc (KM) do" name="power-to"/>
                   
-             <select className="search__select" name="fuel-type" id="searchFuelType">
+             <select className="search__select" name="fuel-type" id="searchFuelType" onChange={(e) => setSelectedValue('fuelTypes', e.target.value)}>
                  <option value="">Rodzaj paliwa</option>
-                 {Object.keys(fuelTypes).map((key) => (
-                   <option key={key} value={fuelTypes[key]}>
-                     {fuelTypes[key]}
-                   </option>
-                 ))}
+                 {fuelTypes.map(([key, value]) => (
+                    <option key={key} value={value}>{value}</option>
+                  ))}
              </select>
      
-             <select className="search__select" name="gearbox-type" id="">
+             <select className="search__select" name="gearbox-type" id="" onChange={(e) => setSelectedValue('gearBoxes', e.target.value)}>
                  <option value="">Rodzaj skrzyni biegów</option>
-                 {Object.keys(gearboxTypes).map((key) => (
-                   <option key={key} value={gearboxTypes[key]}>
-                     {gearboxTypes[key]}
-                   </option>
-                 ))}
+                 {gearBoxes.map(([key, value]) => (
+                    <option key={key} value={value}>{value}</option>
+                  ))}
              </select>
      
-             <select className="search__select" name="drive-type" id="">
-                 <option value="">Napęd</option>
-                 {Object.keys(drives).map((key) => (
-                   <option key={key} value={drives[key]}>
-                     {drives[key]}
-                   </option>
-                 ))}
+             <select className="search__select" name="drive-type" id="" onChange={(e) => setSelectedValue('drives', e.target.value)}>
+                 <option value="" disabled hidden>Napęd</option>
+                 {drives.map(([key, value]) => (
+                    <option key={key} value={value}>{value}</option>
+                  ))}
              </select>
                   
              <select className="search__select" name="body-type" id="">
@@ -116,9 +122,9 @@ const Search = () => {
      
              <select className="search__select" name="condition" id="">
                  <option value="">Stan</option>
-                 {Object.keys(conditions).map((key) => (
-                   <option key={key} value={conditions[key]}>
-                     {conditions[key]}
+                 {Object.keys(condition).map((key) => (
+                   <option key={key} value={condition[key]}>
+                     {condition[key]}
                    </option>
                  ))}
              </select>
