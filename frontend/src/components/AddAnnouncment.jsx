@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, TextField, Button, MenuItem, Container, Typography } from '@mui/material';
 import { carBrands, fuelTypes, bodyTypes, gearboxTypes, drives, conditions, damages } from './Announcments';
+import Dropzone from './Dropzone/Dropzone';
 
 const AddAnnouncement = () => {
   const [formData, setFormData] = useState({
@@ -37,12 +38,14 @@ const AddAnnouncement = () => {
     e.preventDefault();
     console.log('Dodaj ogłoszenie:', formData);
   };
+  
 
   return (
     <Container maxWidth="lg">
         <Typography variant="h3" component="h2" sx={{ textAlign: 'center', padding: '16px', }}>
         Dodaj ogłoszenie
         </Typography>
+        <Dropzone></Dropzone>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={3}
         sx={{
