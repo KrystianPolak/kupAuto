@@ -1,25 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import carBrandsAndModels from '../data/carBrandsAndModels.json';
 
 const useCarBrandsAndModels = () => {
   const [selectedBrand, setSelectedBrand] = useState('');
+  const [carModels, setCarModels] = useState([]);
 
   const carBrands = carBrandsAndModels.map(car => car.brand).sort();
-  
+
   const handleBrandChange = (brand) => {
     setSelectedBrand(brand);
   };
 
-  const getModelsForSelectedBrand = () => {
+  useEffect(() => {
     const selectedBrandData = carBrandsAndModels.find(car => car.brand === selectedBrand);
-    return selectedBrandData ? selectedBrandData.models : [];
-  };
+    setCarModels(selectedBrandData ? selectedBrandData.models : []);
+  }, [selectedBrand]); // Ten useEffect reaguje na każdą zmianę `selectedBrand`
 
   return {
     carBrands,
     selectedBrand,
     handleBrandChange,
-    carModels: getModelsForSelectedBrand()
+    carModels
   };
 };
 

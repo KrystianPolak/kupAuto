@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { Grid, TextField, Button, MenuItem, Container, Typography } from '@mui/material';
-import { carBrands, fuelTypes, bodyTypes, gearboxTypes, drives, conditions, damages } from './Announcments';
 import Dropzone from './Dropzone/Dropzone';
+import useCarData from '../hooks/useCarData';
+import Textarea from '@mui/joy/Textarea';
+import useCarBrandsAndModels from '../hooks/useCarBrandsAndModels';
+import LocationSearch from './LocationSearch/LocationSearch';
+
 
 const AddAnnouncement = () => {
   const [formData, setFormData] = useState({
     brand: '',
     model: '',
-    priceFrom: '',
-    priceTo: '',
-    mileageFrom: '',
-    mileageTo: '',
+    price: '',
+    mileage: '',
     yearFrom: '',
     yearTo: '',
-    engineCapacityFrom: '',
-    engineCapacityTo: '',
-    powerFrom: '',
-    powerTo: '',
+    engineCapacity: '',
+    horsePower: '',
     fuelType: '',
     gearbox: '',
     drive: '',
@@ -25,6 +25,19 @@ const AddAnnouncement = () => {
     damage: '',
     location: ''
   });
+
+  
+
+  const { carBrands, selectedBrand, handleBrandChange, carModels } = useCarBrandsAndModels();
+
+  const {
+    fuelTypes,
+    gearBoxes,
+    drives,
+    condition,
+    damages,
+    bodyTypes,
+    setSelectedValue} = useCarData();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,26 +49,30 @@ const AddAnnouncement = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Dodaj ogłoszenie:', formData);
+  };
+
+  const test = (e) => {
+    handleBrandChange(e.target.value); 
+    handleInputChange(e); 
   };
   
+
+
 
   return (
     <Container maxWidth="lg">
         <Typography variant="h3" component="h2" sx={{ textAlign: 'center', padding: '16px', }}>
         Dodaj ogłoszenie
         </Typography>
-        <Dropzone></Dropzone>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={3}
         sx={{
             display: 'flex',
-            justifyContent: 'center', // Wycentrowanie w poziomie
+            justifyContent: 'center', 
             alignItems: 'center',
-            py: '10px', // Wycentrowanie w pionie
+            py: '10px', 
           }}
         >
-          {/* Marka */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               select
@@ -63,53 +80,56 @@ const AddAnnouncement = () => {
               name="brand"
               fullWidth
               value={formData.brand}
-              onChange={handleInputChange}
-            >
-              {Object.keys(carBrands).map((key) => (
-                <MenuItem key={key} value={carBrands[key]}>
-                  {carBrands[key]}
+              onChange={(e) => {
+                test(e); 
+              }}            >
+              {carBrands.map((brand, index) => (
+              <MenuItem key={index} value={brand}> 
+                {brand} 
+              </MenuItem>
+            ))}
+            </TextField>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={5}>
+            <TextField
+              select
+              label="Model"
+              name="model"
+              fullWidth
+              value={formData.model}
+              onChange={handleInputChange}>
+              {carModels.map((models, index) => (
+                <MenuItem key={index} value={models}> 
+                  {models} 
                 </MenuItem>
               ))}
             </TextField>
           </Grid>
 
-          {/* Model */}
-          <Grid item xs={12} sm={6} md={5}>
-            <TextField
-              label="Model"
-              name="model"
-              fullWidth
-              value={formData.model}
-              onChange={handleInputChange}
-            />
-          </Grid>
-
-          {/* Cena od */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               label="Cena"
               name="price"
               type="number"
               fullWidth
-              value={formData.priceFrom}
+              value={formData.price}
               onChange={handleInputChange}
             />
           </Grid>
 
 
-          {/* Przebieg od */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               label="Przebieg"
               name="mileage"
               type="number"
               fullWidth
-              value={formData.mileageFrom}
+              value={formData.mileage}
               onChange={handleInputChange}
             />
           </Grid>
 
-          {/* Rok produkcji do */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               label="Rok produkcji"
@@ -127,24 +147,22 @@ const AddAnnouncement = () => {
               name="engineCapacity"
               type="number"
               fullWidth
-              value={formData.engineCapacityTo}
+              value={formData.engineCapacity}
               onChange={handleInputChange}
             />
           </Grid>
 
-          {/* Moc do */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               label="Moc (KM)"
               name="horsePower"
               type="number"
               fullWidth
-              value={formData.powerTo}
+              value={formData.horsePower}
               onChange={handleInputChange}
             />
           </Grid>
 
-          {/* Rodzaj paliwa */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               select
@@ -154,15 +172,14 @@ const AddAnnouncement = () => {
               value={formData.fuelType}
               onChange={handleInputChange}
             >
-              {Object.keys(fuelTypes).map((key) => (
-                <MenuItem key={key} value={fuelTypes[key]}>
-                  {fuelTypes[key]}
-                </MenuItem>
-              ))}
+            {fuelTypes.map(([key, value]) => (
+              <MenuItem key={key} value={value}> 
+                {value} 
+              </MenuItem>
+            ))}
             </TextField>
           </Grid>
 
-          {/* Rodzaj skrzyni biegów */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               select
@@ -172,15 +189,14 @@ const AddAnnouncement = () => {
               value={formData.gearbox}
               onChange={handleInputChange}
             >
-              {Object.keys(gearboxTypes).map((key) => (
-                <MenuItem key={key} value={gearboxTypes[key]}>
-                  {gearboxTypes[key]}
-                </MenuItem>
-              ))}
+              {gearBoxes.map(([key, value]) => (
+              <MenuItem key={key} value={value}> 
+                {value} 
+              </MenuItem>
+            ))}
             </TextField>
           </Grid>
 
-          {/* Napęd */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               select
@@ -190,15 +206,14 @@ const AddAnnouncement = () => {
               value={formData.drive}
               onChange={handleInputChange}
             >
-              {Object.keys(drives).map((key) => (
-                <MenuItem key={key} value={drives[key]}>
-                  {drives[key]}
-                </MenuItem>
-              ))}
+              {drives.map(([key, value]) => (
+              <MenuItem key={key} value={value}> 
+                {value} 
+              </MenuItem>
+            ))}
             </TextField>
           </Grid>
 
-          {/* Typ nadwozia */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               select
@@ -208,15 +223,14 @@ const AddAnnouncement = () => {
               value={formData.bodyType}
               onChange={handleInputChange}
             >
-              {Object.keys(bodyTypes).map((key) => (
-                <MenuItem key={key} value={bodyTypes[key]}>
-                  {bodyTypes[key]}
-                </MenuItem>
-              ))}
+               {bodyTypes.map(([key, value]) => (
+              <MenuItem key={key} value={value}> 
+                {value} 
+              </MenuItem>
+            ))}
             </TextField>
           </Grid>
 
-          {/* Stan pojazdu */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               select
@@ -226,15 +240,14 @@ const AddAnnouncement = () => {
               value={formData.condition}
               onChange={handleInputChange}
             >
-              {Object.keys(conditions).map((key) => (
-                <MenuItem key={key} value={conditions[key]}>
-                  {conditions[key]}
-                </MenuItem>
-              ))}
+               {condition.map(([key, value]) => (
+              <MenuItem key={key} value={value}> 
+                {value} 
+              </MenuItem>
+            ))}
             </TextField>
           </Grid>
 
-          {/* Stan uszkodzeń */}
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               select
@@ -244,26 +257,30 @@ const AddAnnouncement = () => {
               value={formData.damage}
               onChange={handleInputChange}
             >
-              {Object.keys(damages).map((key) => (
-                <MenuItem key={key} value={damages[key]}>
-                  {damages[key]}
-                </MenuItem>
-              ))}
+               {damages.map(([key, value]) => (
+              <MenuItem key={key} value={value}> 
+                {value} 
+              </MenuItem>
+            ))}
             </TextField>
           </Grid>
 
-          {/* Lokalizacja */}
           <Grid item xs={12} sm={6} md={5}>
-            <TextField
-              label="Lokalizacja"
-              name="location"
+            <LocationSearch></LocationSearch>
+          </Grid>
+          <Grid item xs={12} sm={6} md={10}>
+            <Textarea
+              placeholder="Opis"
+              name="description"
               fullWidth
-              value={formData.location}
+              minRows={4} 
+              value={formData.description}
               onChange={handleInputChange}
             />
-          </Grid>
-
-          {/* Przycisk */}
+        </Grid>
+        <Grid item xs={12} sm={6} md={10}>
+        <Dropzone></Dropzone>
+        </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Button type="submit" variant="contained" color="primary" fullWidth sx={{padding: '16px', marginBottom: '10px'}}>
               Dodaj
