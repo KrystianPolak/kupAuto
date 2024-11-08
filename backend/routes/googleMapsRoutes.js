@@ -5,10 +5,10 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 async function fetchVoidship(placeId, apiKey) {
     const geocodeResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&language=pl&key=${apiKey}`);
     const geocodeData = await geocodeResponse.json();
-    const wojewodztwo = geocodeData.results[0]?.address_components.find(component => 
+    const voidship = geocodeData.results[0]?.address_components.find(component => 
       component.types.includes('administrative_area_level_1')
     );
-    return wojewodztwo ? wojewodztwo.long_name : null;
+    return voidship ? voidship.long_name : null;
   }
 
 router.get('/places', async (req, res) => {
@@ -19,15 +19,15 @@ router.get('/places', async (req, res) => {
         const response = await fetch(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${query}&types=(cities)&components=country:PL&language=pl&key=${apiKey}`);
         const data = await response.json();
         
-        const predictionsWithWojewodztwo = await Promise.all(data.predictions.map(async (prediction) => {
-          const wojewodztwo = await fetchVoidship(prediction.place_id, apiKey);
+        const predictionsWithVoidship = await Promise.all(data.predictions.map(async (prediction) => {
+          const voidship = await fetchVoidship(prediction.place_id, apiKey);
           return {
             ...prediction,
-            wojewodztwo: wojewodztwo || 'Brak informacji o województwie'
+            voidship: voidship || 'Brak informacji o województwie'
           };
         }));
         
-        res.json({ predictions: predictionsWithWojewodztwo });
+        res.json({ predictions: predictionsWithVoidship });
       } catch (error) {
         console.error('Błąd podczas pobierania danych z Google Places API lub Geocoding API', error);
         res.status(500).json({ error: 'Błąd podczas pobierania danych z Google API' });

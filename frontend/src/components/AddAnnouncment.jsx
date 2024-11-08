@@ -9,6 +9,7 @@ import LocationSearch from './LocationSearch/LocationSearch';
 
 const AddAnnouncement = () => {
   const [formData, setFormData] = useState({
+    title: '',
     brand: '',
     model: '',
     price: '',
@@ -65,6 +66,7 @@ const AddAnnouncement = () => {
         Dodaj ogłoszenie
         </Typography>
       <form onSubmit={handleSubmit}>
+      
         <Grid container spacing={3}
         sx={{
             display: 'flex',
@@ -73,6 +75,16 @@ const AddAnnouncement = () => {
             py: '10px', 
           }}
         >
+            <Grid item xs={12} sm={6} md={10}>
+              <TextField
+                label="Nagłówek ogłoszenia"
+                name="title"
+                fullWidth
+                value={formData.title}
+                onChange={handleInputChange}
+              />
+            </Grid>
+          
           <Grid item xs={12} sm={6} md={5}>
             <TextField
               select

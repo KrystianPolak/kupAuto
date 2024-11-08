@@ -12,10 +12,9 @@ const LocationSearch = () => {
 
     if (newInputValue.length > 2) {
       const response = await fetchLocation(newInputValue);
-      // Aktualizacja predictions, aby uwzględnić województwo
       const predictions = response.predictions.map((prediction) => ({
         label: prediction.description,
-        region: prediction.wojewodztwo, // Województwo z backendu
+        region: prediction.voidship, 
       }));
       setOptions(predictions);
     }
@@ -32,7 +31,7 @@ const LocationSearch = () => {
           <div>
             <span>{option.label}</span>
             <br />
-            <small>{option.region}</small> {/* Wyświetlanie województwa */}
+            <small>{option.region}</small> 
           </div>
         </li>
       )}
